@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public class Entity : Node2D
 {
@@ -12,11 +11,10 @@ public class Entity : Node2D
 
 	private void SetWorldPos(Vector2 worldPos){
 		_worldPos = worldPos.Floor();
-		Position = World.TILESIZE * worldPos;
+		Position = World.Tilesize * worldPos;
 	}
 
 	public override void _Ready()
 	{
-		
 	}
 }

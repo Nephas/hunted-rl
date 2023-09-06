@@ -1,13 +1,9 @@
 using Godot;
-using Godot.Collections;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public class World : Node2D
 {
-	public static Vector2 TILESIZE = new Vector2(16,24);
-	public static Vector2 WORLDSIZE = Vector2.Zero;
+	public static Vector2 Tilesize = new Vector2(16,24);
+	public static Vector2 Worldsize = Vector2.Zero;
 
 	public void Instantiate(string path, Vector2 pos){
 		var pack = ResourceLoader.Load<PackedScene>(path);
@@ -16,19 +12,21 @@ public class World : Node2D
 		AddChild(obj);
 	}
 
-	public override void _Ready()
+	public override void _EnterTree()
 	{
-		WORLDSIZE = GetViewport().Size / TILESIZE;
+		base._EnterTree();
+		
+		Worldsize = GetViewport().Size / Tilesize;
 
-		Instantiate("res://prefab/pc.tscn", WORLDSIZE * 1/3);
-		Instantiate("res://prefab/npc.tscn", WORLDSIZE * 2/3);
+		Instantiate("res://prefab/pc.tscn", Worldsize * 1/4);
+		Instantiate("res://prefab/npc.tscn", Worldsize * 2/4);
+		Instantiate("res://prefab/npc.tscn", Worldsize * 3/4);
 
-		foreach(var i in new List<int>{1,2,3,7,8,9}){
-			Instantiate("res://prefab/wall.tscn", new Vector2(i,15));
+		var rng = new RandomNumberGenerator();
+		rng.Randomize();
+		
+		for(int i = 0; i<5; i++){
+			Instantiate("res://prefab/wall.tscn", new Vector2(rng.RandfRange(0, Worldsize.x),rng.RandfRange(0, Worldsize.y)));
 		}
-	}
-
-	public override void _Process(float delta)
-	{
 	}
 }

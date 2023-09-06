@@ -22,3 +22,22 @@ jobs:
           ITCH_USER: nephas
           PACKAGE: hunted-win.zip
           VERSION: ${{ steps.download-windows.outputs.version }}
+  release_linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: download Linux
+        id: download-linux
+        uses: dsaltares/fetch-gh-release-asset@master
+        with:
+          file: hunted-linux.zip
+        env:
+          GITHUB_TOKEN: "${{ secrets.GH_CREDENTIALS }}"
+      - name: deploy to itch.io (Linux)
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: linux
+          ITCH_GAME: hunted-rl
+          ITCH_USER: nephas
+          PACKAGE: hunted-linux.zip
+          VERSION: ${{ steps.download-linux.outputs.version }}
