@@ -1,12 +1,53 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://script/World.cs" type="Script" id=1]
+[ext_resource path="res://script/RoundTimer.cs" type="Script" id=2]
+[ext_resource path="res://script/Input.cs" type="Script" id=3]
 
 [node name="MainScene" type="Node2D"]
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource( 1 )
 
+[node name="Timer" type="Timer" parent="World"]
+wait_time = 0.5
+autostart = true
+script = ExtResource( 2 )
+
 [node name="GUI" type="Control" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="Bottom" type="ColorRect" parent="GUI"]
+margin_top = 500.0
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0.184314, 0.184314, 0.184314, 1 )
+
+[node name="Bottom" type="Label" parent="GUI/Bottom"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 1000.0
+margin_bottom = 76.0
+text = "Bottom Bar"
+
+[node name="Side" type="ColorRect" parent="GUI"]
+margin_left = 800.0
+margin_right = 1024.0
+margin_bottom = 500.0
+color = Color( 0.239216, 0.239216, 0.239216, 1 )
+
+[node name="Log" type="Label" parent="GUI/Side"]
+margin_left = 24.0
+margin_top = 24.0
+margin_right = 200.0
+margin_bottom = 476.0
+text = "Log
+- Item 1
+- Item 2
+- Item 3"
+
+[node name="Input" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[connection signal="timeout" from="World/Timer" to="World/Timer" method="_on_Turn"]

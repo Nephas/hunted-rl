@@ -1,36 +1,34 @@
 using Godot;
+using Godot.Collections;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class World : Node2D
 {
-	// Declare member variables here. Examples:
-	// private int a = 2;
-	// private string b = "text";
-	private Sprite _pc;
-	private RandomNumberGenerator _rng;
+	public static Vector2 TILESIZE = new Vector2(16,24);
+	public static Vector2 WORLDSIZE = Vector2.Zero;
 
-	// Called when the node enters the scene tree for the first time.
+	public void Instantiate(string path, Vector2 pos){
+		var pack = ResourceLoader.Load<PackedScene>(path);
+		var obj = pack.Instance<Entity>();
+		obj.WorldPos = pos;
+		AddChild(obj);
+	}
+
 	public override void _Ready()
 	{
-		var pack = ResourceLoader.Load<PackedScene>("res://sprite/pc.tscn");
-		_pc = pack.Instance<Sprite>();
-		_pc.Position = new Vector2(100, 100);
-		
-		AddChild(_pc);
+		WORLDSIZE = GetViewport().Size / TILESIZE;
 
-		_rng = new RandomNumberGenerator();
-		_rng.Randomize();
+		Instantiate("res://prefab/pc.tscn", WORLDSIZE * 1/3);
+		Instantiate("res://prefab/npc.tscn", WORLDSIZE * 2/3);
+
+		foreach(var i in new List<int>{1,2,3,7,8,9}){
+			Instantiate("res://prefab/wall.tscn", new Vector2(i,15));
+		}
 	}
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(float delta)
 	{
-		Console.WriteLine("YO");
-
-		_pc.Position = _pc.Position + GetRandVec();
-	}
-
-	public Vector2 GetRandVec(){
-		return new Vector2(_rng.RandfRange(-1f, 1f), _rng.RandfRange(-1f, 1f));
 	}
 }
