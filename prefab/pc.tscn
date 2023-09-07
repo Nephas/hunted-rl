@@ -4,7 +4,7 @@
 [ext_resource path="res://script/Entity.cs" type="Script" id=2]
 [ext_resource path="res://script/Actor.cs" type="Script" id=3]
 
-[node name="Sprite" type="Sprite" groups=["pc"]]
+[node name="Sprite" type="Sprite" groups=["blocked", "pc"]]
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 96, 16, 24 )

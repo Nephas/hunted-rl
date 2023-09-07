@@ -9,5 +9,10 @@ namespace huntedrl.script
         {
             return node.GetTree().GetNodesInGroup("pc").OfType<Entity>().FirstOrDefault();
         }
+
+        public static Entity GetEntity(this Node node)
+        {
+            return node.GetParent<Entity>();
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot;
 
 public class Entity : Node2D
@@ -14,6 +15,11 @@ public class Entity : Node2D
 		Position = World.Tilesize * worldPos;
 	}
 
+	public T GetComponent<T>()
+	{
+		return GetChildren().OfType<T>().FirstOrDefault();
+	}
+	
 	public override void _Ready()
 	{
 	}

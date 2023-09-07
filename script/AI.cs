@@ -17,13 +17,13 @@ public class AI : Node
 		_rng = new RandomNumberGenerator();
 	}
 
-	public void Move()
+	public Vector2 GetMoveDir()
 	{
-		_rng.Randomize();
-		var node = GetParent<Entity>();
-		var target = CARDINALS.Select(dir => dir + node.WorldPos)
-			.OrderBy(pos => pos.DistanceSquaredTo(_pc.WorldPos)).First();
-		
-		node.WorldPos = target;
+		var pos = this.GetEntity().WorldPos;
+		return CARDINALS
+			.Where(dir => !World.Get().IsBlocked(pos + dir))
+			.Append(Vector2.Zero)
+			.OrderBy(dir => _pc.WorldPos.DistanceSquaredTo(pos + dir))
+			.FirstOrDefault();
 	}
 }

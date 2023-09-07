@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://icon.png" type="Texture" id=1]
-[ext_resource path="res://script/Menu.cs" type="Script" id=2]
+[ext_resource path="res://script/SplashScreen.cs" type="Script" id=2]
 
-[node name="Menu" type="Node2D"]
+[node name="Intro" type="Node2D" groups=["intro-screen"]]
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]

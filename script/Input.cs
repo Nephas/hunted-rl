@@ -17,16 +17,13 @@ public class Input : Node
 	{
 		if (_actor.Actions <= 0) return;
 
-		var move = Vector2.Zero;
-		if (@event.IsActionPressed("up"))  move = Vector2.Up;
-		if (@event.IsActionPressed("down")) move += Vector2.Down;
-		if (@event.IsActionPressed("left")) move += Vector2.Left;
-		if (@event.IsActionPressed("right")) move += Vector2.Right;
+		var dir = Vector2.Zero;
+		if (@event.IsActionPressed("up"))  dir = Vector2.Up;
+		if (@event.IsActionPressed("down")) dir += Vector2.Down;
+		if (@event.IsActionPressed("left")) dir += Vector2.Left;
+		if (@event.IsActionPressed("right")) dir += Vector2.Right;
 
-		if (move != Vector2.Zero)
-		{
-			_pc.WorldPos += move;
-			_actor.Actions--;
-		}
+		if (dir != Vector2.Zero && _actor.CanMove(dir))
+			_actor.Move(dir);
 	}
 }
