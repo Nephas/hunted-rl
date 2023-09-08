@@ -10,7 +10,7 @@ public class Input : Node
 	public override void _Ready()
 	{
 		_pc = this.GetPC();
-		_actor = _pc.GetChildren().OfType<Actor>().FirstOrDefault();
+		_actor = _pc.GetComponent<Actor>();
 	}
 
 	public override void _Input(InputEvent @event)
@@ -25,5 +25,7 @@ public class Input : Node
 
 		if (dir != Vector2.Zero && _actor.CanMove(dir))
 			_actor.Move(dir);
+		
+		if (@event.IsActionPressed("ui_accept")) _pc.GetComponent<PC>().ContextInteract();
 	}
 }

@@ -1,22 +1,29 @@
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Management.Instrumentation;
 using Godot;
 
 public class World : Node2D
 {
+	public static List<Vector2> CARDINALS = new List<Vector2>
+		{ Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right };
+	
 	public static Vector2 Tilesize = new Vector2(16,24);
 	public static Vector2 Worldsize = Vector2.Zero;
 	private static World _instance;
 
 	public static World Get() => _instance;
-	
-	public void Instantiate(string path, Vector2 pos){
-		var pack = ResourceLoader.Load<PackedScene>(path);
+
+	public void Instantiate(string name, int x, int y)
+	{
+		Vector2 pos = new Vector2(x, y);
+		var pack = ResourceLoader.Load<PackedScene>($"res://prefab/{name}.tscn");
 		var obj = pack.Instance<Entity>();
 		obj.WorldPos = pos;
 		AddChild(obj);
 	}
-
+	
 	public override void _EnterTree()
 	{
 		base._EnterTree();
@@ -24,21 +31,27 @@ public class World : Node2D
 		
 		Worldsize = GetViewport().Size / Tilesize;
 
-		Instantiate("res://prefab/pc.tscn", new Vector2(6,6));
-		Instantiate("res://prefab/npc.tscn", new Vector2(14,6));
-		Instantiate("res://prefab/npc.tscn", new Vector2(15,7));
+		var file = new File();
+		file.Open("res://resources/level.tres", File.ModeFlags.Read);
 
-		InstantiateWalls();
-	}
-
-	private void InstantiateWalls()
-	{
-		var res = ResourceLoader.Load<StreamTexture>("res://resources/level_map.png", "Image");
-		var img = res.GetData();
-		img.Lock();
-		for (int i =0; i < img.GetWidth(); i++)
-			for (int j =0; j < img.GetHeight(); j++)
-				if (img.GetPixel(i,j).v < 0.5) Instantiate("res://prefab/wall.tscn", new Vector2(i,j));
+		int j = 0;
+		foreach (var line in file.GetAsText().Split("\n"))
+		{
+			int i = 0;
+			foreach(var c in line)
+			{
+				switch (c)
+				{
+					case '#': Instantiate("wall", i,j); break;
+					case '@': Instantiate("pc", i, j); break;
+					case '€': Instantiate("npc", i, j); break;
+					case 'E': Instantiate("escape", i, j); break;
+					case 'D': Instantiate("door", i, j); break;
+				}
+				i++;
+			}
+			j++;
+		}
 	}
 
 	public bool IsBlocked(Vector2 pos)
@@ -47,8 +60,11 @@ public class World : Node2D
 			.OfType<Entity>().Any(e => e.WorldPos == pos);
 	}
 
-	public void OnPCDeath()
-	{
-		
-	}
+	public IEnumerable<Entity> GetAllEntities() => GetChildren().OfType<Entity>();
+
+	public IEnumerable<Entity> GetEntitiesAt(Vector2 pos) => GetAllEntities().Where(e => e.WorldPos == pos);
+
+	public IEnumerable<Entity> GetNeighboringEntities(Vector2 pos) 
+		=> CARDINALS.Select(dir => pos + dir)
+			.SelectMany(neighPos => GetEntitiesAt(neighPos));
 }

@@ -19,8 +19,26 @@ public class Entity : Node2D
 	{
 		return GetChildren().OfType<T>().FirstOrDefault();
 	}
+
+	public bool IsInteractable()
+	{
+		return GetChildren().Cast<IInteractable>().Any();
+	}
+	
+	public void InteractWith(Entity initiator)
+	{
+		var interactable = GetChildren().Cast<IInteractable>().FirstOrDefault(i => i != null);
+		GD.Print($"Triggering Interaction '{interactable?.Description}'");
+		interactable?.Interact(initiator);
+	}
 	
 	public override void _Ready()
 	{
 	}
+}
+
+public interface IInteractable
+{
+	void Interact(Entity initiator);
+	string Description { get; }
 }

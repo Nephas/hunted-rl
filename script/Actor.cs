@@ -5,9 +5,21 @@ using huntedrl.script;
 public class Actor : Label
 {
 	private int _actions;
-	private AI _ai;
 	private bool _alive;
 
+	[Signal]
+	public delegate void OnDeath();
+
+	public bool Alive
+	{
+		get => _alive;
+		set
+		{
+			if (value == false) EmitSignal("OnDeath");
+			_alive = value;
+		}
+	}
+	
 	public int Actions
 	{
 		get => _actions;
@@ -18,7 +30,6 @@ public class Actor : Label
 	{
 		Actions = 0;
 		_alive = true;
-		_ai = this.GetEntity().GetComponent<AI>();
 	}
 
 	private string GetActionBar(int n)
@@ -34,18 +45,14 @@ public class Actor : Label
 		return !World.Get().IsBlocked(pos + dir);
 	}
 
+	public void Attack(Actor other)
+	{
+		other.Alive = false;
+	}
+	
 	public void Move(Vector2 dir)
 	{
 		this.GetEntity().WorldPos += dir;
 		Actions--;
-	}
-	
-	public void TakeAIAction(){
-		if (Actions <= 0) return;
-		var dir = _ai.GetMoveDir();
-		if (dir != Vector2.Zero)
-			Move(dir);
-		else
-			Actions--;
 	}
 }

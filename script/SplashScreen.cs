@@ -3,7 +3,7 @@ using Godot;
 public class SplashScreen : Node2D
 {
 	private void _on_MenuButton() => Continue();
-
+	
 	public override void _Input(InputEvent @event)
 	{
 		if (@event.IsActionPressed("ui_accept")) Continue();

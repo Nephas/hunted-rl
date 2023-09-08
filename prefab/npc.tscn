@@ -24,15 +24,15 @@ animations = [ {
 } ]
 
 [node name="AnimatedSprite" type="AnimatedSprite" groups=["blocked", "npc"]]
+modulate = Color( 0.827451, 0, 0, 1 )
 frames = SubResource( 4 )
-frame = 1
 playing = true
 script = ExtResource( 2 )
 
-[node name="Actor" type="Label" parent="." groups=["actor", "ai"]]
+[node name="Actor" type="Label" parent="." groups=["actor"]]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 3 )
 
-[node name="AI" type="Node" parent="."]
+[node name="AI" type="Node" parent="." groups=["ai"]]
 script = ExtResource( 4 )
