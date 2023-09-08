@@ -1,13 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://script/World.cs" type="Script" id=1]
-[ext_resource path="res://script/RoundTimer.cs" type="Script" id=2]
+[ext_resource path="res://script/GameTimer.cs" type="Script" id=2]
 [ext_resource path="res://script/Input.cs" type="Script" id=3]
+[ext_resource path="res://script/Log.cs" type="Script" id=4]
 
 [node name="MainScene" type="Node2D"]
 
 [node name="World" type="Node2D" parent="."]
 script = ExtResource( 1 )
+
+[node name="Input" type="Node" parent="World"]
+script = ExtResource( 3 )
 
 [node name="Timer" type="Timer" parent="World"]
 wait_time = 0.1
@@ -32,22 +36,22 @@ margin_bottom = 76.0
 text = "Bottom Bar"
 
 [node name="Side" type="ColorRect" parent="GUI"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
 margin_left = 800.0
 margin_right = 1024.0
 margin_bottom = 500.0
 color = Color( 0.239216, 0.239216, 0.239216, 1 )
 
-[node name="Log" type="Label" parent="GUI/Side"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/Side"]
 margin_left = 24.0
 margin_top = 24.0
-margin_right = 200.0
-margin_bottom = 476.0
-text = "Log
-- Item 1
-- Item 2
-- Item 3"
+margin_right = 224.0
+margin_bottom = 474.0
+scroll_horizontal_enabled = false
 
-[node name="Input" type="Node" parent="."]
-script = ExtResource( 3 )
+[node name="Log" type="Label" parent="GUI/Side/ScrollContainer"]
+margin_bottom = 14.0
+script = ExtResource( 4 )
 
-[connection signal="timeout" from="World/Timer" to="World/Timer" method="_on_Turn"]
+[connection signal="timeout" from="World/Timer" to="World/Timer" method="OnTick"]
+[connection signal="timeout" from="World/Timer" to="World/Input" method="ResetCooldown"]

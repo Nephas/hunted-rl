@@ -1,21 +1,29 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://resources/atlas_ascii.tres" type="Texture" id=1]
 [ext_resource path="res://script/Entity.cs" type="Script" id=2]
 [ext_resource path="res://script/Actor.cs" type="Script" id=3]
 [ext_resource path="res://script/PC.cs" type="Script" id=4]
+[ext_resource path="res://resources/lightmap.png" type="Texture" id=5]
 
-[node name="Sprite" type="Sprite" groups=["blocked", "pc"]]
-modulate = Color( 0.556863, 1, 0.415686, 1 )
-texture = ExtResource( 1 )
-region_enabled = true
-region_rect = Rect2( 0, 96, 16, 24 )
+[node name="Entity" type="Node2D" groups=["blocked", "pc"]]
 script = ExtResource( 2 )
+
+[node name="PC" type="Node" parent="."]
+script = ExtResource( 4 )
 
 [node name="Actor" type="Label" parent="." groups=["actor"]]
 margin_right = 40.0
 margin_bottom = 14.0
 script = ExtResource( 3 )
 
-[node name="PC" type="Node" parent="."]
-script = ExtResource( 4 )
+[node name="Sprite" type="Sprite" parent="."]
+modulate = Color( 0.556863, 1, 0.415686, 1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 96, 16, 24 )
+
+[node name="Light2D" type="Light2D" parent="."]
+texture = ExtResource( 5 )
+texture_scale = 3.0
+shadow_enabled = true

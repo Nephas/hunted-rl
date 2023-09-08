@@ -40,6 +40,7 @@ public class World : Node2D
 			int i = 0;
 			foreach(var c in line)
 			{
+				Instantiate("floor", i, j);
 				switch (c)
 				{
 					case '#': Instantiate("wall", i,j); break;

@@ -55,4 +55,23 @@ public class Actor : Label
 		this.GetEntity().WorldPos += dir;
 		Actions--;
 	}
+
+	public bool TryMove(Vector2 dir)
+	{
+		if (!CanMove(dir)) return false;
+		Move(dir);
+		return true;
+	}
+	
+	public bool TryContextInteract()
+	{
+		var pos = this.GetEntity().WorldPos;
+		var interactable = World.Get().GetNeighboringEntities(pos)
+			.FirstOrDefault(e => e.IsInteractable());
+		if (interactable == null) return false;
+		
+		interactable.InteractWith(this.GetEntity());
+		Actions--;
+		return true;
+	}
 }

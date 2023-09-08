@@ -18,13 +18,4 @@ public class PC : Node
 	{
 		GetTree().ChangeScene("res://scenes/death.tscn");
 	}
-
-	public void ContextInteract()
-	{
-		var pos = this.GetEntity().WorldPos;
-		World.Get().GetNeighboringEntities(pos)
-			.FirstOrDefault(e => e.IsInteractable())?
-			.InteractWith(this.GetEntity());
-		_actor.Actions--;
-	}
 }

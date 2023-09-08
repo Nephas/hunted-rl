@@ -1,31 +1,39 @@
+using System;
+using System.Collections.Generic;
 using Godot;
 using System.Linq;
 using huntedrl.script;
 
 public class Input : Node
 {
-	private Entity _pc;
-	private Actor _actor;
+	private bool _cooldown;
 	
-	public override void _Ready()
+	public void ResetCooldown()
 	{
-		_pc = this.GetPC();
-		_actor = _pc.GetComponent<Actor>();
+		_cooldown = false;
 	}
-
+	
 	public override void _Input(InputEvent @event)
 	{
-		if (_actor.Actions <= 0) return;
+		if (GetPCActor().Actions <= 0 || _cooldown) return;
 
-		var dir = Vector2.Zero;
-		if (@event.IsActionPressed("up"))  dir = Vector2.Up;
-		if (@event.IsActionPressed("down")) dir += Vector2.Down;
-		if (@event.IsActionPressed("left")) dir += Vector2.Left;
-		if (@event.IsActionPressed("right")) dir += Vector2.Right;
-
-		if (dir != Vector2.Zero && _actor.CanMove(dir))
-			_actor.Move(dir);
-		
-		if (@event.IsActionPressed("ui_accept")) _pc.GetComponent<PC>().ContextInteract();
+		foreach (var mapping in ActionMap)
+			if (@event.IsActionPressed(mapping.Key, true)) {
+				if (mapping.Value.Invoke()) {
+					Log.AddLine($"Player Action {mapping.Key}");
+					_cooldown = true;
+				}
+			}
 	}
+
+	private static Actor GetPCActor() => World.Get().GetPC().GetComponent<Actor>();
+	
+	private Dictionary<string, Func<bool>> ActionMap = new Dictionary<string, Func<bool>>
+	{
+		{ "up", () => GetPCActor().TryMove(Vector2.Up) },
+		{ "down", () => GetPCActor().TryMove(Vector2.Down) },
+		{ "left", () => GetPCActor().TryMove(Vector2.Left) },
+		{ "right", () => GetPCActor().TryMove(Vector2.Right) },
+		{ "ui_accept", () => GetPCActor().TryContextInteract() },
+	};
 }

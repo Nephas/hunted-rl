@@ -22,13 +22,13 @@ public class Entity : Node2D
 
 	public bool IsInteractable()
 	{
-		return GetChildren().Cast<IInteractable>().Any();
+		return GetChildren().OfType<IInteractable>().Any();
 	}
 	
 	public void InteractWith(Entity initiator)
 	{
 		var interactable = GetChildren().Cast<IInteractable>().FirstOrDefault(i => i != null);
-		GD.Print($"Triggering Interaction '{interactable?.Description}'");
+		Log.AddLine($"Interaction: '{interactable?.Description}'");
 		interactable?.Interact(initiator);
 	}
 	
