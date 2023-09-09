@@ -12,7 +12,7 @@ public class Entity : Node2D
 
 	private void SetWorldPos(Vector2 worldPos){
 		_worldPos = worldPos.Floor();
-		Position = World.Tilesize * worldPos;
+		Position = GameWorld.Tilesize * (worldPos + new Vector2(0.5f,0.5f));
 	}
 
 	public T GetComponent<T>()
@@ -34,6 +34,8 @@ public class Entity : Node2D
 	
 	public override void _Ready()
 	{
+		_worldPos = (Position / GameWorld.Tilesize).Floor();
+		AddToGroup("entity");
 	}
 }
 

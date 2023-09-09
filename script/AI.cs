@@ -19,8 +19,8 @@ public class AI : Node
 	public Vector2 GetMoveDir()
 	{
 		var pos = this.GetEntity().WorldPos;
-		return World.CARDINALS
-			.Where(dir => !World.Get().IsBlocked(pos + dir))
+		return GameWorld.CARDINALS
+			.Where(dir => !GameWorld.Get().IsBlocked(pos + dir))
 			.Append(Vector2.Zero)
 			.OrderBy(dir => _pc.WorldPos.DistanceSquaredTo(pos + dir))
 			.FirstOrDefault();

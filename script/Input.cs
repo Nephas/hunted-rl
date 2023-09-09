@@ -26,7 +26,7 @@ public class Input : Node
 			}
 	}
 
-	private static Actor GetPCActor() => World.Get().GetPC().GetComponent<Actor>();
+	private static Actor GetPCActor() => GameWorld.Get().GetPC().GetComponent<Actor>();
 	
 	private Dictionary<string, Func<bool>> ActionMap = new Dictionary<string, Func<bool>>
 	{

@@ -42,7 +42,7 @@ public class Actor : Label
 	public bool CanMove(Vector2 dir)
 	{
 		var pos = this.GetEntity().WorldPos;
-		return !World.Get().IsBlocked(pos + dir);
+		return !GameWorld.Get().IsBlocked(pos + dir);
 	}
 
 	public void Attack(Actor other)
@@ -66,7 +66,7 @@ public class Actor : Label
 	public bool TryContextInteract()
 	{
 		var pos = this.GetEntity().WorldPos;
-		var interactable = World.Get().GetNeighboringEntities(pos)
+		var interactable = GameWorld.Get().GetNeighboringEntities(pos)
 			.FirstOrDefault(e => e.IsInteractable());
 		if (interactable == null) return false;
 		

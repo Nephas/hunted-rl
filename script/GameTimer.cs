@@ -27,6 +27,8 @@ public class GameTimer : Timer
 		if (next.GetEntity().IsInGroup("pc") && next.Actions > 0) return;
 		if (next.Actions > 0) next.GetEntity().GetComponent<AI>().TakeAIAction();
 		else QueueNextActor();
+		
+//		GameWorld.Get().GetPC().GetComponent<PC>().UpdateFoV();
 	}
 
 	private void QueueNextActor()

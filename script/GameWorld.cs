@@ -4,16 +4,19 @@ using System.Linq;
 using System.Management.Instrumentation;
 using Godot;
 
-public class World : Node2D
+public class GameWorld : Node2D
 {
 	public static List<Vector2> CARDINALS = new List<Vector2>
 		{ Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right };
-	
+
+	private static GameWorld _instance;
 	public static Vector2 Tilesize = new Vector2(16,24);
 	public static Vector2 Worldsize = Vector2.Zero;
-	private static World _instance;
 
-	public static World Get() => _instance;
+	private TileMap _wallMap;
+	private int[] _wallTiles;
+
+	public static GameWorld Get() => _instance;
 
 	public void Instantiate(string name, int x, int y)
 	{
@@ -31,6 +34,7 @@ public class World : Node2D
 		
 		Worldsize = GetViewport().Size / Tilesize;
 
+		/*
 		var file = new File();
 		file.Open("res://resources/level.tres", File.ModeFlags.Read);
 
@@ -53,15 +57,28 @@ public class World : Node2D
 			}
 			j++;
 		}
+		*/
+
+//		Instantiate("pc", 10, 10);
+		
+		_wallMap = GetChildren().OfType<TileMap>().FirstOrDefault(tm => tm.Name == "WallMap");
+		var _tiles = ResourceLoader.Load<TileSet>("res://resources/tiles/map_tileset.tres");
+		_wallTiles = _tiles.GetTilesIds().OfType<int>()
+			.Where(id => _tiles.TileGetName(id).StartsWith("wall"))
+			.ToArray();
+
+		_wallMap.SetCell(1,1, _wallTiles[0]);
 	}
 
 	public bool IsBlocked(Vector2 pos)
 	{
-		return GetTree().GetNodesInGroup("blocked")
+		var isWall = _wallTiles.Contains(_wallMap.GetCellv(pos));
+		var isBlocked = GetTree().GetNodesInGroup("blocked")
 			.OfType<Entity>().Any(e => e.WorldPos == pos);
+		return isBlocked || isWall;
 	}
 
-	public IEnumerable<Entity> GetAllEntities() => GetChildren().OfType<Entity>();
+	public IEnumerable<Entity> GetAllEntities() => GetTree().GetNodesInGroup("entity").OfType<Entity>();
 
 	public IEnumerable<Entity> GetEntitiesAt(Vector2 pos) => GetAllEntities().Where(e => e.WorldPos == pos);
 
