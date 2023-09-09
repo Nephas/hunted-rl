@@ -4,7 +4,7 @@
 [ext_resource path="res://script/Entity.cs" type="Script" id=2]
 [ext_resource path="res://script/Escape.cs" type="Script" id=3]
 
-[node name="Entity" type="Node2D"]
+[node name="Escape" type="Node2D" groups=["blocked"]]
 script = ExtResource( 2 )
 
 [node name="Escape" type="Node" parent="." groups=["interact"]]
@@ -13,4 +13,4 @@ script = ExtResource( 3 )
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 region_enabled = true
-region_rect = Rect2( 240, 0, 16, 24 )
+region_rect = Rect2( 48, 24, 16, 24 )

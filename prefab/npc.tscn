@@ -36,5 +36,7 @@ script = ExtResource( 3 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 modulate = Color( 0.827451, 0, 0, 1 )
+z_index = 1
 frames = SubResource( 4 )
+frame = 1
 playing = true

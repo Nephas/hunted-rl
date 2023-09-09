@@ -33,41 +33,12 @@ public class GameWorld : Node2D
 		_instance = this;
 		
 		Worldsize = GetViewport().Size / Tilesize;
-
-		/*
-		var file = new File();
-		file.Open("res://resources/level.tres", File.ModeFlags.Read);
-
-		int j = 0;
-		foreach (var line in file.GetAsText().Split("\n"))
-		{
-			int i = 0;
-			foreach(var c in line)
-			{
-				Instantiate("floor", i, j);
-				switch (c)
-				{
-					case '#': Instantiate("wall", i,j); break;
-					case '@': Instantiate("pc", i, j); break;
-					case '€': Instantiate("npc", i, j); break;
-					case 'E': Instantiate("escape", i, j); break;
-					case 'D': Instantiate("door", i, j); break;
-				}
-				i++;
-			}
-			j++;
-		}
-		*/
-
-//		Instantiate("pc", 10, 10);
 		
 		_wallMap = GetChildren().OfType<TileMap>().FirstOrDefault(tm => tm.Name == "WallMap");
 		var _tiles = ResourceLoader.Load<TileSet>("res://resources/tiles/map_tileset.tres");
 		_wallTiles = _tiles.GetTilesIds().OfType<int>()
 			.Where(id => _tiles.TileGetName(id).StartsWith("wall"))
 			.ToArray();
-
-		_wallMap.SetCell(1,1, _wallTiles[0]);
 	}
 
 	public bool IsBlocked(Vector2 pos)
