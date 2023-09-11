@@ -37,8 +37,16 @@ public class AI : Node
 		
 		var dir = GetMoveDir();
 		if (dir != Vector2.Zero)
+		{
 			_actor.Move(dir);
+		}
 		else
 			_actor.Actions--;
+	}
+
+	public void SpawnBlip()
+	{
+		var dir = GameWorld.CARDINALS.OrderBy(_ => _rng.Randi()).FirstOrDefault();
+		GameWorld.Get().Instantiate("blip", this.GetEntity().WorldPos + dir);
 	}
 }

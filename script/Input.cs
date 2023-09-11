@@ -7,10 +7,12 @@ using huntedrl.script;
 public class Input : Node
 {
 	private bool _cooldown;
+	private PC _pc;
 	
 	public void ResetCooldown()
 	{
 		_cooldown = false;
+		_pc = GameWorld.Get().GetPC().GetComponent<PC>();
 	}
 	
 	public override void _Input(InputEvent @event)
@@ -21,6 +23,8 @@ public class Input : Node
 			if (@event.IsActionPressed(mapping.Key, true)) {
 				if (mapping.Value.Invoke()) {
 					Log.AddLine($"Player Action {mapping.Key}");
+					_pc.UpdateFoV();
+					_pc.UpdateHighlights();
 					_cooldown = true;
 				}
 			}

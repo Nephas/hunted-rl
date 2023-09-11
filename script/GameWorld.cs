@@ -18,13 +18,12 @@ public class GameWorld : Node2D
 
 	public static GameWorld Get() => _instance;
 
-	public void Instantiate(string name, int x, int y)
+	public void Instantiate(string name, Vector2 pos)
 	{
-		Vector2 pos = new Vector2(x, y);
 		var pack = ResourceLoader.Load<PackedScene>($"res://prefab/{name}.tscn");
 		var obj = pack.Instance<Entity>();
 		obj.WorldPos = pos;
-		AddChild(obj);
+		GetChildren().OfType<Node>().FirstOrDefault(n => n.Name == "Entities")?.AddChild(obj);
 	}
 	
 	public override void _EnterTree()

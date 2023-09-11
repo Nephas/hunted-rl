@@ -11,6 +11,9 @@ public class GameTimer : Timer
 	[Signal]
 	public delegate void GameTick();
 	
+	[Signal]
+	public delegate void GameTurn();
+	
 	public override void _Ready()
 	{
 		foreach (var actor in GetTree().GetNodesInGroup("actor"))
@@ -36,6 +39,10 @@ public class GameTimer : Timer
 		var next = _actors.Dequeue();
 		_actors.Enqueue(next);
 		_actors.First().Actions = 4;
+		
+		if (next.GetEntity().IsInGroup("pc")) EmitSignal("GameTurn");
+		else next.GetEntity().GetComponent<AI>().SpawnBlip();
+
 		Log.AddLine($"Begin {next.GetEntity().Name}'s turn");
 	}
 }

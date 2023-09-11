@@ -1,5 +1,6 @@
 using System.Linq;
 using Godot;
+using Vector2 = System.Numerics.Vector2;
 
 namespace huntedrl.script
 {

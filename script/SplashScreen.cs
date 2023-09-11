@@ -1,6 +1,6 @@
 using Godot;
 
-public class SplashScreen : Node2D
+public class SplashScreen : Control
 {
 	private void _on_MenuButton() => Continue();
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://script/GameWorld.cs" type="Script" id=1]
 [ext_resource path="res://script/GameTimer.cs" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://prefab/door.tscn" type="PackedScene" id=8]
 [ext_resource path="res://prefab/cryopod.tscn" type="PackedScene" id=9]
 [ext_resource path="res://prefab/escape.tscn" type="PackedScene" id=10]
+[ext_resource path="res://resources/theme.tres" type="Theme" id=11]
+[ext_resource path="res://prefab/vent.tscn" type="PackedScene" id=12]
 
 [node name="MainScene" type="Node2D"]
 
@@ -43,7 +45,7 @@ tile_data = PoolIntArray( 65538, 0, 0, 65539, 0, 0, 65540, 0, 0, 65541, 0, 0, 65
 [node name="Entities" type="Node" parent="GameWorld"]
 
 [node name="PC" parent="GameWorld/Entities" instance=ExtResource( 6 )]
-position = Vector2( 152, 108 )
+position = Vector2( 120, 180 )
 
 [node name="NPC" parent="GameWorld/Entities" instance=ExtResource( 7 )]
 position = Vector2( 616, 300 )
@@ -87,37 +89,51 @@ position = Vector2( 120, 300 )
 [node name="Door6" parent="GameWorld/Entities" instance=ExtResource( 8 )]
 position = Vector2( 360, 300 )
 
+[node name="Vent" parent="GameWorld/Entities" instance=ExtResource( 12 )]
+position = Vector2( 152, 204 )
+
+[node name="Vent2" parent="GameWorld/Entities" instance=ExtResource( 12 )]
+position = Vector2( 440, 420 )
+
+[node name="Vent3" parent="GameWorld/Entities" instance=ExtResource( 12 )]
+position = Vector2( 616, 396 )
+
 [node name="GUI" type="CanvasLayer" parent="."]
 
-[node name="Bottom" type="ColorRect" parent="GUI"]
+[node name="Control" type="Control" parent="GUI"]
+margin_right = 40.0
+margin_bottom = 40.0
+theme = ExtResource( 11 )
+
+[node name="Bottom" type="ColorRect" parent="GUI/Control"]
 margin_top = 540.0
 margin_right = 1024.0
 margin_bottom = 600.0
 color = Color( 0.184314, 0.184314, 0.184314, 1 )
 
-[node name="Bottom" type="Label" parent="GUI/Bottom"]
+[node name="Bottom" type="Label" parent="GUI/Control/Bottom"]
 margin_left = 24.0
 margin_top = 24.0
 margin_right = 1000.0
 margin_bottom = 48.0
 text = "Bottom Bar"
 
-[node name="Side" type="ColorRect" parent="GUI"]
+[node name="Side" type="ColorRect" parent="GUI/Control"]
 modulate = Color( 0.752941, 0.752941, 0.752941, 1 )
-margin_left = 856.0
+margin_left = 792.0
 margin_right = 1024.0
 margin_bottom = 540.0
 color = Color( 0.239216, 0.239216, 0.239216, 1 )
 
-[node name="ScrollContainer" type="ScrollContainer" parent="GUI/Side"]
+[node name="ScrollContainer" type="ScrollContainer" parent="GUI/Control/Side"]
 margin_left = 16.0
 margin_top = 12.0
-margin_right = 160.0
+margin_right = 224.0
 margin_bottom = 516.0
 scroll_horizontal_enabled = false
 
-[node name="Log" type="Label" parent="GUI/Side/ScrollContainer"]
-margin_bottom = 14.0
+[node name="Log" type="Label" parent="GUI/Control/Side/ScrollContainer"]
+margin_bottom = 20.0
 script = ExtResource( 4 )
 
 [connection signal="timeout" from="GameWorld/Timer" to="GameWorld/Input" method="ResetCooldown"]
