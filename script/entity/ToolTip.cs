@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Linq;
+using huntedrl.script;
 
 public class ToolTip : ColorRect
 {
@@ -22,7 +23,7 @@ public class ToolTip : ColorRect
 		set
 		{
 			GetChild<Node2D>(0).Visible = value;
-			SelfModulate = new Color(Colors.White,  value  ? 0.5F : 0F);
+			SelfModulate = new Color(Colors.White, value ? 0.5F : 0F);
 		}
 	}
 

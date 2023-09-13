@@ -12,12 +12,14 @@ public class PC : Node
 	{
 		_actor = this.GetEntity().GetComponent<Actor>();
 
+		var _timer = GameWorld.Get().GetChildByName<Timer>("Timer");
+		_timer.Connect("Tick", this, "UpdateFoV");
 		_actor.Connect("OnDeath", this, "OnPCDeath");
 	}
 
 	private void OnPCDeath()
 	{
-		GetTree().ChangeScene("res://scenes/death.tscn");
+		GetTree().ChangeScene("res://scenes/failure.tscn");
 	}
 
 	public void UpdateHighlights()
@@ -41,14 +43,25 @@ public class PC : Node
 	public void UpdateFoV()
 	{
 		var space = GameWorld.Get().GetWorld2d().DirectSpaceState;
-		var otherEntities = GameWorld.Get().GetAllEntities()
+		var fovEntities = GameWorld.Get().GetAllEntities()
 			.Where(e => e.IsInGroup("fov"));
 		var pc = GameWorld.Get().GetPC();
 
-		foreach (var target in otherEntities)
+		foreach (var target in fovEntities)
 		{
 			var result = space.IntersectRay(pc.Position, target.Position);
-			target.Visible = result.Count == 0;
+			target.Show = result.Count == 0;
 		}
+		
+		foreach (var target in GetTree().GetNodesInGroup("blip").OfType<Entity>())
+		{
+			var result = space.IntersectRay(pc.Position, target.Position);
+			if (result.Count == 0) target.QueueFree();
+		}
+	}
+
+	public void UpdateActionBar()
+	{
+		
 	}
 }

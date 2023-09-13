@@ -39,5 +39,6 @@ public class Door : Node, IInteractable
 		Open = !Open;
 	}
 
+	[Export]
 	public string Description => "Open/Close";
 }

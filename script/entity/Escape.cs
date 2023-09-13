@@ -9,8 +9,9 @@ public class Escape : Node, IInteractable
 	
 	public void Interact(Entity initiator)
 	{
-		GetTree().ChangeScene("res://scenes/intro.tscn");
+		GetTree().ChangeScene("res://scenes/success.tscn");
 	}
-
-	public string Description => "Escape";
+	
+	[Export]
+	public string Description => "Launch Escape Pod";
 }

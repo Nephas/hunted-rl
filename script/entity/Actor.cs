@@ -19,11 +19,13 @@ public class Actor : Label
 			_alive = value;
 		}
 	}
+
+	public int MaxActions = 5;
 	
 	public int Actions
 	{
 		get => _actions;
-		set => Text = GetActionBar(_actions = value);
+		set => Text = UpdateBar(_actions = value);
 	}
 
 	public override void _Ready()
@@ -32,7 +34,7 @@ public class Actor : Label
 		_alive = true;
 	}
 
-	private string GetActionBar(int n)
+	private string UpdateBar(int n)
 	{
 		var text = "";
 		for (var i = 0; i < n; i++) text += ".";

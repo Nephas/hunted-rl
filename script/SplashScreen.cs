@@ -11,10 +11,10 @@ public class SplashScreen : Control
 
 	private void Continue()
 	{
-		if (IsInGroup("intro-screen"))
+		if (IsInGroup("intro"))
 			GetTree().ChangeScene("res://scenes/main.tscn");
 		
-		if (IsInGroup("death-screen"))
+		if (IsInGroup("success") || IsInGroup("failure"))
 			GetTree().ChangeScene("res://scenes/intro.tscn");
 	}
 }

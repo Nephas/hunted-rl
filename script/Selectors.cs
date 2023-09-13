@@ -15,5 +15,10 @@ namespace huntedrl.script
         {
             return node.GetParent<Entity>();
         }
+
+        public static T GetChildByName<T>(this Node node, string name) where T : Node
+        {
+            return node.GetChildren().OfType<T>().FirstOrDefault(n => n.Name == name);
+        }
     }
 }

@@ -49,4 +49,12 @@ public class AI : Node
 		var dir = GameWorld.CARDINALS.OrderBy(_ => _rng.Randi()).FirstOrDefault();
 		GameWorld.Get().Instantiate("blip", this.GetEntity().WorldPos + dir);
 	}
+	
+	public void Path()
+	{
+		var astar = new AStar2D();
+		
+		var dir = GameWorld.CARDINALS.OrderBy(_ => _rng.Randi()).FirstOrDefault();
+		GameWorld.Get().Instantiate("blip", this.GetEntity().WorldPos + dir);
+	}
 }

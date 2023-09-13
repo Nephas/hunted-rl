@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://script/SplashScreen.cs" type="Script" id=1]
+[ext_resource path="res://resources/theme.tres" type="Theme" id=2]
+
+[node name="Success" type="Control" groups=["success"]]
+theme = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 420.0
+margin_top = 166.0
+margin_right = 630.0
+margin_bottom = 274.0
+text = "You Escape"
+align = 1
+valign = 1
+
+[node name="Button" type="Button" parent="."]
+margin_left = 455.0
+margin_top = 316.0
+margin_right = 597.0
+margin_bottom = 362.0
+text = "<= Restart =>"
+
+[connection signal="button_down" from="Button" to="." method="_on_MenuButton"]

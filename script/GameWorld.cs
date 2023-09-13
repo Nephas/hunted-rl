@@ -10,12 +10,12 @@ public class GameWorld : Node2D
 		{ Vector2.Up, Vector2.Down, Vector2.Left, Vector2.Right };
 
 	private static GameWorld _instance;
-	public static Vector2 Tilesize = new Vector2(16,24);
+	public static Vector2 Tilesize =  Vector2.Zero;
 	public static Vector2 Worldsize = Vector2.Zero;
 
 	private TileMap _wallMap;
 	private int[] _wallTiles;
-
+	
 	public static GameWorld Get() => _instance;
 
 	public void Instantiate(string name, Vector2 pos)
@@ -38,6 +38,8 @@ public class GameWorld : Node2D
 		_wallTiles = _tiles.GetTilesIds().OfType<int>()
 			.Where(id => _tiles.TileGetName(id).StartsWith("wall"))
 			.ToArray();
+
+		Tilesize = _wallMap.CellSize;
 	}
 
 	public bool IsBlocked(Vector2 pos)

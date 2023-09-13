@@ -22,8 +22,7 @@ public class Input : Node
 		foreach (var mapping in ActionMap)
 			if (@event.IsActionPressed(mapping.Key, true)) {
 				if (mapping.Value.Invoke()) {
-					Log.AddLine($"Player Action {mapping.Key}");
-					_pc.UpdateFoV();
+					GD.Print($"Player Action {mapping.Key}");
 					_pc.UpdateHighlights();
 					_cooldown = true;
 				}
