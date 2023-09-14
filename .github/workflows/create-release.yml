@@ -17,8 +17,8 @@ jobs:
         # Ensure that you get the entire project history
         with:
           fetch-depth: 0
-      - name: create game release
-        # Use latest version (see releases for all versions)
+      - name: export game
+        id: export
         uses: firebelley/godot-export@v5.2.0
         with:
           # Defining all the required inputs
@@ -33,3 +33,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_CREDENTIALS }}
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+
+      - name: create release
+        uses: ncipollo/release-action@v1.11.2
+        with:
+          token: ${{ secrets.GH_CREDENTIALS }}
+          generateReleaseNotes: true
+          artifacts: ${{ steps.export.outputs.archive_directory }}/* # Added "/*" at the end is glob pattern match for this action
