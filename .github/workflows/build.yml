@@ -17,7 +17,8 @@ jobs:
         # Ensure that you get the entire project history
         with:
           fetch-depth: 0
-      - name: create game release
+      - name: export game
+        id: export
         # Use latest version (see releases for all versions)
         uses: firebelley/godot-export@v5.2.0
         with:
@@ -29,29 +30,17 @@ jobs:
           # set this either to . or your game path, e.g. ./godot in case
           # your game is within a sub-directory
           relative_project_path: ./
+          relative_export_path: ./build
           archive_output: true
           use_godot_3: true
           
         env:
           GITHUB_TOKEN: ${{ secrets.GH_CREDENTIALS }}
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-
-  release_web:
-    runs-on: ubuntu-latest
-    steps:
-      - name: download Web
-        id: download-web
-        uses: dsaltares/fetch-gh-release-asset@master
+      - name: create release
+        uses: ncipollo/release-action@v1.11.2
         with:
-          file: hunted-web.zip
-        env:
-          GITHUB_TOKEN: "${{ secrets.GH_CREDENTIALS }}"
-      - name: deploy to itch.io (web)
-        uses: josephbmanley/butler-publish-itchio-action@master
-        env:
-          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-          CHANNEL: web
-          ITCH_GAME: hunted-web
-          ITCH_USER: nephas
-          PACKAGE: hunted-web.zip
-          VERSION: ${{ steps.download-web.outputs.version }}  
+          token: ${{ secrets.GH_CREDENTIALS }}
+          generateReleaseNotes: true
+          tag: ${{ github.ref_name }}
+          artifacts: ${{ steps.export.outputs.archive_directory }}/* # Added "/*" at the end is glob pattern match for this action     
