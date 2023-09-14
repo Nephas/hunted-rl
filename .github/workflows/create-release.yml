@@ -5,38 +5,19 @@ on:
 
 jobs:
   export_game:
-    # Always use ubuntu-latest for this action
     runs-on: ubuntu-latest
-    # Job name, can be anything
-    name: Export Game
+    name: Export game to Github
     steps:
-      # Always include the checkout step so that
-      # your project is available for Godot to export
       - name: checkout
         uses: actions/checkout@v2.3.1
-        # Ensure that you get the entire project history
         with:
           fetch-depth: 0
-      - name: export game
-        id: export
-        uses: firebelley/godot-export@v5.2.0
+      - name: create game release
+        uses: firebelley/godot-export@v2.3.0
         with:
-          # Defining all the required inputs
-          # I used the mono version of Godot in this example
           godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/3.5.2/mono/Godot_v3.5.2-stable_mono_linux_headless_64.zip
           godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/3.5.2/mono/Godot_v3.5.2-stable_mono_export_templates.tpz
-          cache: true
-          relative_project_path: ./
-          relative_export_path: ./build
-          archive_output: true
-          use_godot_3: true
+          relative_project_path: .
         env:
           GITHUB_TOKEN: ${{ secrets.GH_CREDENTIALS }}
           ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
-
-      - name: create release
-        uses: ncipollo/release-action@v1.11.2
-        with:
-          token: ${{ secrets.GH_CREDENTIALS }}
-          generateReleaseNotes: true
-          artifacts: ${{ steps.export.outputs.archive_directory }}/* # Added "/*" at the end is glob pattern match for this action
