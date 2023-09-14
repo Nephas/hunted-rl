@@ -1,11 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://resources/theme.tres" type="Theme" id=1]
-[ext_resource path="res://script/SplashScreen.cs" type="Script" id=2]
+[ext_resource path="res://script/ContinueButton.cs" type="Script" id=2]
 
-[node name="Intro" type="Control" groups=["intro"]]
+[node name="Intro" type="Control"]
 theme = ExtResource( 1 )
-script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
 margin_left = 331.0
@@ -28,5 +27,6 @@ margin_top = 394.0
 margin_right = 596.0
 margin_bottom = 420.0
 text = "<= Awake =>"
+script = ExtResource( 2 )
 
-[connection signal="button_down" from="Button" to="." method="_onContinueButton"]
+[connection signal="button_down" from="Button" to="Button" method="_onContinueButton"]
