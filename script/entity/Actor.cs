@@ -20,7 +20,8 @@ public class Actor : Label
 		}
 	}
 
-	public int MaxActions = 5;
+	[Export]
+	public int MaxActions = 4;
 	
 	public int Actions
 	{

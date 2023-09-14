@@ -33,20 +33,20 @@ public class GameTimer : Timer
 		
 		var next = _actors.Peek();
 		if (next.GetEntity().IsInGroup("pc") && next.Actions > 0) return;
-		if (next.Actions > 0) next.GetEntity().GetComponent<AI>().TakeAIAction();
+		if (next.Actions > 0) next.GetEntity().GetComponent<AI>().TakeAction();
 		else QueueNextActor();
 	}
 
 	private void QueueNextActor()
 	{
-		var next = _actors.Dequeue();
-		_actors.Enqueue(next);
-		_actors.First().Actions = next.MaxActions;
+		var last = _actors.Dequeue();
+		_actors.Enqueue(last);
+		_actors.Peek().Actions = _actors.Peek().MaxActions;
 		
-		if (next.GetEntity().IsInGroup("pc")) OnTurn();
-		else next.GetEntity().GetComponent<AI>().SpawnBlip();
+		if (_actors.Peek().GetEntity().IsInGroup("pc")) OnTurn();
+		else _actors.Peek().GetEntity().GetComponent<AI>().InitiateTurn();
 
-		Log.AddLine($"Begin {next.GetEntity().Name}'s turn");
+		Log.AddLine($"Begin {_actors.Peek().GetEntity().Name}'s turn");
 	}
 
 	private void OnTurn()

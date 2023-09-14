@@ -19,6 +19,7 @@ margin_bottom = 14.0
 text = "....."
 align = 1
 script = ExtResource( 3 )
+MaxActions = 6
 
 [node name="Hunter" parent="." instance=ExtResource( 5 )]
 

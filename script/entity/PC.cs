@@ -48,20 +48,9 @@ public class PC : Node
 		var pc = GameWorld.Get().GetPC();
 
 		foreach (var target in fovEntities)
-		{
-			var result = space.IntersectRay(pc.Position, target.Position);
-			target.Show = result.Count == 0;
-		}
+			target.Show = pc.HasLos(target);
 		
 		foreach (var target in GetTree().GetNodesInGroup("blip").OfType<Entity>())
-		{
-			var result = space.IntersectRay(pc.Position, target.Position);
-			if (result.Count == 0) target.QueueFree();
-		}
-	}
-
-	public void UpdateActionBar()
-	{
-		
+			if (pc.HasLos(target)) target.QueueFree();
 	}
 }

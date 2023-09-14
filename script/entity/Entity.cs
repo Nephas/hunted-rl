@@ -20,9 +20,10 @@ public class Entity : Node2D
 			tooltip.Lock = !value;
 		}}
 	
-	private void SetWorldPos(Vector2 worldPos){
-		_worldPos = worldPos.Floor();
-		Position = GameWorld.Tilesize * (worldPos + new Vector2(0.5f,0.5f));
+	private void SetWorldPos(Vector2 value)
+	{
+		_worldPos = value.Floor();
+		Position = GameWorld.Tilesize * (value + new Vector2(0.5f,0.5f));
 	}
 
 	public T GetComponent<T>()
@@ -40,6 +41,12 @@ public class Entity : Node2D
 		var interactable = GetChildren().OfType<IInteractable>().FirstOrDefault(i => i != null);
 		Log.AddLine($"Interaction: '{interactable?.Description}'");
 		interactable?.Interact(initiator);
+	}
+
+	public bool HasLos(Entity other)
+	{
+		var result = GameWorld.Get().GetWorld2d().DirectSpaceState.IntersectRay(this.Position, other.Position);
+		return result.Count == 0;
 	}
 	
 	public override void _Ready()

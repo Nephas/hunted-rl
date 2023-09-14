@@ -54,7 +54,7 @@ script = ExtResource( 3 )
 self_modulate = Color( 1, 0.109804, 0.109804, 1 )
 light_mask = 0
 frames = SubResource( 9 )
-frame = 3
+frame = 5
 playing = true
 
 [node name="[ERR] 661" parent="." instance=ExtResource( 1 )]

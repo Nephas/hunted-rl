@@ -12,6 +12,5 @@ public class Escape : Node, IInteractable
 		GetTree().ChangeScene("res://scenes/success.tscn");
 	}
 	
-	[Export]
 	public string Description => "Launch Escape Pod";
 }

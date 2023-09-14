@@ -15,6 +15,7 @@ public class GameWorld : Node2D
 
 	private TileMap _wallMap;
 	private int[] _wallTiles;
+	public Pathfinder Pathfinder;
 	
 	public static GameWorld Get() => _instance;
 
@@ -30,15 +31,17 @@ public class GameWorld : Node2D
 	{
 		base._EnterTree();
 		_instance = this;
-		
-		Worldsize = GetViewport().Size / Tilesize;
-		
+
 		_wallMap = GetChildren().OfType<TileMap>().FirstOrDefault(tm => tm.Name == "WallMap");
 		var _tiles = ResourceLoader.Load<TileSet>("res://resources/tiles/map_tileset.tres");
 		_wallTiles = _tiles.GetTilesIds().OfType<int>()
 			.Where(id => _tiles.TileGetName(id).StartsWith("wall"))
 			.ToArray();
 
+		Pathfinder = GetChildren().OfType<Pathfinder>().FirstOrDefault();
+		
+		var cells = _wallMap.GetUsedCells().OfType<Vector2>();
+		Worldsize = new Vector2(cells.Max(v => v.x),cells.Max(v => v.y));
 		Tilesize = _wallMap.CellSize;
 	}
 

@@ -3,15 +3,15 @@ using System;
 
 public class Log : Label
 {
-	private static Label _instance;
+	private static string content = "";
 	
 	public override void _Ready()
 	{
-		_instance = this;
+		Text = content;
 	}
 
 	public static void AddLine(string text)
 	{
-		_instance.Text = $"- {text}\n{_instance.Text}";
+		content = $"- {text}\n{content}";
 	}
 }
