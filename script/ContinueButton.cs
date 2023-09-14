@@ -7,7 +7,9 @@ public class ContinueButton : Button
 	[Export]
 	public string TargetScene = "main";
 
-	public void _onContinueButton() => this.LoadScene(TargetScene);
+	public void OnPress(){ 
+		this.LoadScene(TargetScene);
+	}
 	
 	public override void _Input(InputEvent @event)
 	{
