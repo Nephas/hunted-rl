@@ -4,3 +4,4 @@
 .import/
 builds/
 .godot.log
+.vscode/settings.json

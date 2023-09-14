@@ -15,4 +15,8 @@ public class ContinueButton : Button
 	{
 		if (@event.IsActionPressed("ui_accept")) this.LoadScene(TargetScene);
 	}
+
+	public override void _Ready(){
+		this.Connect("pressed", this, "OnPress");
+	}
 }

@@ -28,5 +28,3 @@ margin_right = 596.0
 margin_bottom = 420.0
 text = "<= Awake =>"
 script = ExtResource( 2 )
-
-[connection signal="pressed" from="Button" to="Button" method="OnPress"]

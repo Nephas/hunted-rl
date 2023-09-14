@@ -23,5 +23,3 @@ margin_bottom = 324.0
 text = "<= Restart =>"
 script = ExtResource( 1 )
 TargetScene = "intro"
-
-[connection signal="pressed" from="Button" to="Button" method="OnPress"]
