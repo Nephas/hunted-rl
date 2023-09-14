@@ -4,7 +4,7 @@ using Godot;
 
 public class SplashScreen : Control
 {
-	private void _onContinueButton() => Continue();
+	public void _onContinueButton() => Continue();
 	
 	public override void _Input(InputEvent @event)
 	{
