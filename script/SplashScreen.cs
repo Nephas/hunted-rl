@@ -1,8 +1,10 @@
+using huntedrl.script;
+
 using Godot;
 
 public class SplashScreen : Control
 {
-	private void _on_MenuButton() => Continue();
+	private void _onContinueButton() => Continue();
 	
 	public override void _Input(InputEvent @event)
 	{
@@ -11,11 +13,9 @@ public class SplashScreen : Control
 
 	private void Continue()
 	{
-		if (IsInGroup("intro"))
-			GetTree().ChangeScene("res://scenes/main.tscn");
+		GD.Print("Continue Button Pressed");
+		if (IsInGroup("intro")) this.LoadScene("main");
 		
-		if (IsInGroup("success") || IsInGroup("failure"))
-			GetTree().ChangeScene("res://scenes/intro.tscn");
+		if (IsInGroup("success") || IsInGroup("failure")) this.LoadScene("intro");
 	}
 }
-

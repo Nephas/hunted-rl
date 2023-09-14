@@ -17,10 +17,7 @@ public class PC : Node
 		_actor.Connect("OnDeath", this, "OnPCDeath");
 	}
 
-	private void OnPCDeath()
-	{
-		GetTree().ChangeScene("res://scenes/failure.tscn");
-	}
+	private void OnPCDeath() => this.LoadScene("failure");
 
 	public void UpdateHighlights()
 	{

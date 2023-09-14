@@ -17,10 +17,10 @@ align = 1
 valign = 1
 
 [node name="Button" type="Button" parent="."]
-margin_left = 455.0
-margin_top = 316.0
-margin_right = 597.0
-margin_bottom = 362.0
+margin_left = 456.0
+margin_top = 298.0
+margin_right = 598.0
+margin_bottom = 324.0
 text = "<= Restart =>"
 
-[connection signal="button_down" from="Button" to="." method="_on_MenuButton"]
+[connection signal="button_down" from="Button" to="." method="_onContinueButton"]

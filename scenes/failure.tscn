@@ -23,4 +23,4 @@ margin_right = 597.0
 margin_bottom = 362.0
 text = "<= Restart =>"
 
-[connection signal="button_down" from="Button" to="." method="_on_MenuButton"]
+[connection signal="button_down" from="Button" to="." method="_onContinueButton"]

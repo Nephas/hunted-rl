@@ -3,3 +3,4 @@
 .mono/
 .import/
 builds/
+.godot.log

@@ -23,10 +23,10 @@ valign = 1
 autowrap = true
 
 [node name="Button" type="Button" parent="."]
-margin_left = 482.0
-margin_top = 378.0
-margin_right = 604.0
-margin_bottom = 415.0
+margin_left = 474.0
+margin_top = 394.0
+margin_right = 596.0
+margin_bottom = 420.0
 text = "<= Awake =>"
 
-[connection signal="button_down" from="Button" to="." method="_on_MenuButton"]
+[connection signal="button_down" from="Button" to="." method="_onContinueButton"]

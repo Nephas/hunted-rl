@@ -45,12 +45,12 @@ public class GameTimer : Timer
 		
 		if (_actors.Peek().GetEntity().IsInGroup("pc")) OnTurn();
 		else _actors.Peek().GetEntity().GetComponent<AI>().InitiateTurn();
-
-		Log.AddLine($"Begin {_actors.Peek().GetEntity().Name}'s turn");
 	}
 
 	private void OnTurn()
 	{
+//		Log.AddLine($"Begin turn {_turn}");
+// TODO: fix turn logic
 		_turn++;
 		EmitSignal("Turn");
 	}
