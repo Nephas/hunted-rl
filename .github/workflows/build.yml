@@ -41,6 +41,4 @@ jobs:
         uses: ncipollo/release-action@v1.11.2
         with:
           token: ${{ secrets.GH_CREDENTIALS }}
-          generateReleaseNotes: true
-          tag: ${{ github.ref_name }}
           artifacts: ${{ steps.export.outputs.archive_directory }}/* # Added "/*" at the end is glob pattern match for this action     
