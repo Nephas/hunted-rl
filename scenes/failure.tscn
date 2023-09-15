@@ -7,19 +7,21 @@
 theme = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 420.0
-margin_top = 166.0
-margin_right = 630.0
-margin_bottom = 274.0
-text = "You Die"
-align = 1
+margin_left = 302.0
+margin_top = 99.0
+margin_right = 719.0
+margin_bottom = 326.0
+text = "As darkness envelops you, an eerie stillness descends. You feel an otherworldly presence drawing near, its unfathomable form shifting in the shadows. You gasp for breath, knowing your fate is sealed. 
+
+The abyssal unknown embraces you, and your consciousness fades into the enigma that haunts these desolate stars."
 valign = 1
+autowrap = true
 
 [node name="Button" type="Button" parent="."]
-margin_left = 455.0
-margin_top = 316.0
-margin_right = 597.0
-margin_bottom = 362.0
+margin_left = 439.0
+margin_top = 347.0
+margin_right = 581.0
+margin_bottom = 393.0
 text = "<= Restart =>"
 script = ExtResource( 1 )
 TargetScene = "intro"
