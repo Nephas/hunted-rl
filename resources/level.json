@@ -1,0 +1,193 @@
+{
+  "rooms": [
+    {
+      "name": "Engineering Bay (A)",
+      "size": "Large",
+      "contents": [
+        {
+          "item": "Heavy Machinery",
+          "character": "M",
+          "description": "Large, complex machines used for ship maintenance."
+        },
+        {
+          "item": "Workbench",
+          "character": "W",
+          "description": "A central workbench with tools and equipment."
+        },
+        {
+          "item": "Control Panel",
+          "character": "C",
+          "description": "An advanced control system for ship functions."
+        }
+      ]
+    },
+    {
+      "name": "Cargo Hold (B)",
+      "size": "Large",
+      "contents": [
+        {
+          "item": "Crates",
+          "character": "X",
+          "description": "Stacks of cargo crates, some open and some closed."
+        },
+        {
+          "item": "Cargo Drones",
+          "character": "D",
+          "description": "Autonomous cargo-moving drones."
+        },
+        {
+          "item": "Cargo Manifest",
+          "character": "P",
+          "description": "A holographic display showing a list of cargo items."
+        }
+      ]
+    },
+    {
+      "name": "Control Center (C)",
+      "size": "Medium",
+      "contents": [
+        {
+          "item": "Computer Terminal",
+          "character": "T",
+          "description": "Multiple screens displaying ship data."
+        },
+        {
+          "item": "Captain's Chair",
+          "character": "S",
+          "description": "The central control chair for ship operations."
+        },
+        {
+          "item": "Navigation Map",
+          "character": "N",
+          "description": "A holographic map of the ship's course."
+        }
+      ]
+    },
+    {
+      "name": "Living Quarters (D)",
+      "size": "Medium",
+      "contents": [
+        {
+          "item": "Bunk Beds",
+          "character": "B",
+          "description": "Rows of bunk beds for the crew."
+        },
+        {
+          "item": "Personal Lockers",
+          "character": "L",
+          "description": "Lockers containing crew members' personal items."
+        },
+        {
+          "item": "Communal Table",
+          "character": "A",
+          "description": "A large table for dining and socializing."
+        }
+      ]
+    },
+    {
+      "name": "Corridor (E)",
+      "size": "Narrow",
+      "contents": [
+        {
+          "item": "Emergency Lights",
+          "character": "I",
+          "description": "Dimly lit with emergency lighting."
+        },
+        {
+          "item": "Ventilation Grates",
+          "character": "V",
+          "description": "Floor grates leading to maintenance tunnels."
+        },
+        {
+          "item": "Security Camera",
+          "character": "R",
+          "description": "A surveillance camera mounted on the wall."
+        }
+      ]
+    },
+    {
+      "name": "Armory (F)",
+      "size": "Small",
+      "contents": [
+        {
+          "item": "Weapon Rack",
+          "character": "R",
+          "description": "A rack with various weapons."
+        },
+        {
+          "item": "Ammo Crates",
+          "character": "A",
+          "description": "Crates containing ammunition."
+        },
+        {
+          "item": "Armor Suit",
+          "character": "U",
+          "description": "A reinforced armor suit on a stand."
+        }
+      ]
+    },
+    {
+      "name": "Mess Hall (G)",
+      "size": "Medium",
+      "contents": [
+        {
+          "item": "Dining Tables",
+          "character": "D",
+          "description": "Tables with chairs for crew meals."
+        },
+        {
+          "item": "Food Dispenser",
+          "character": "F",
+          "description": "A machine dispensing food and drinks."
+        },
+        {
+          "item": "Bulletin Board",
+          "character": "B",
+          "description": "Notices and announcements posted for the crew."
+        }
+      ]
+    },
+    {
+      "name": "Reactor Room (H)",
+      "size": "Large",
+      "contents": [
+        {
+          "item": "Reactor Core",
+          "character": "R",
+          "description": "The ship's power source, emitting a soft glow."
+        },
+        {
+          "item": "Control Consoles",
+          "character": "C",
+          "description": "Consoles for monitoring and adjusting power."
+        },
+        {
+          "item": "Radiation Warning Sign",
+          "character": "W",
+          "description": "A warning sign indicating radiation."
+        }
+      ]
+    },
+    {
+      "name": "Laboratory (I)",
+      "size": "Small",
+      "contents": [
+        {
+          "item": "Lab Equipment",
+          "character": "E",
+          "description": "Scientific equipment and instruments."
+        },
+        {
+          "item": "Specimen Jars",
+          "character": "J",
+          "description": "Jars with strange alien specimens."
+        },
+        {
+          "item": "Research Notes",
+          "character": "N",
+          "description": "Papers and data sheets scattered around."
+        }
+      ]
+    }
+  ]
+}

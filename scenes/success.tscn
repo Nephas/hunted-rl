@@ -7,19 +7,23 @@
 theme = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 420.0
-margin_top = 166.0
-margin_right = 630.0
-margin_bottom = 274.0
-text = "You Escape"
-align = 1
+margin_left = 264.0
+margin_top = 104.0
+margin_right = 758.0
+margin_bottom = 400.0
+text = "As the escape pod's hatch seals shut, a sigh of relief escapes your lips. The distant hum of the starship fades, replaced by the comforting hum of the pod's systems. With trembling hands, you press the launch button. 
+
+The pod jettisons into the inky void and you watch  the vessel recede, the unknown menace trapped within its metallic confines. 
+
+Your pulse slows, and a feeling of triumph washes over you as you journey toward distant lights of sanctuary. "
 valign = 1
+autowrap = true
 
 [node name="Button" type="Button" parent="."]
-margin_left = 456.0
-margin_top = 298.0
-margin_right = 598.0
-margin_bottom = 324.0
+margin_left = 438.0
+margin_top = 424.0
+margin_right = 580.0
+margin_bottom = 450.0
 text = "<= Restart =>"
 script = ExtResource( 1 )
 TargetScene = "intro"
