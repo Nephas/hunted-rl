@@ -85,6 +85,24 @@ public class LevelGen : Node
 			GD.Print("running BSP");
 			Rooms = BSPSplit(Bounds, depth).ToList();
 			GD.Print($"Depth: {depth}; Rooms: {Rooms.Count}");
+
+			var touching = 
+				from roomA in Rooms
+				from roomB in Rooms
+				where roomA.Position < roomB.Position
+				where roomA.Intersects(roomB, true)
+				select Tuple.Create(roomA, roomB);
+			
+			foreach (var tuple in touching)
+			{
+				var border = tuple.Item1.Grow(0.5f).Clip(tuple.Item2).Grow(0.5f);
+				if (border.Area >= 4f)
+				{
+					var passage = border.GetCenter().Round();
+					Passages.Add(passage);
+				}
+			}
+			GD.Print($"Passages: {Passages.Count}");
 		}
 
 		private IEnumerable<Rect2> BSPSplit(Rect2 rect, int depth)
