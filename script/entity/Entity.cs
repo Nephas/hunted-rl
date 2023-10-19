@@ -10,7 +10,7 @@ public class Entity : Node2D
 		get => _worldPos;
 		set => SetWorldPos(value);
 	}
-
+	
 	public bool Show { 
 		get => _show ;
 		set

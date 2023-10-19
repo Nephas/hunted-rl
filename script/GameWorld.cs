@@ -24,7 +24,7 @@ public class GameWorld : Node2D
 		var pack = ResourceLoader.Load<PackedScene>($"res://prefab/{name}.tscn");
 		var obj = pack.Instance<Entity>();
 		obj.WorldPos = pos;
-		GetChildren().OfType<Node>().FirstOrDefault(n => n.Name == "Entities")?.AddChild(obj);
+		GetNode<Node2D>("Entities");
 	}
 	
 	public override void _EnterTree()
